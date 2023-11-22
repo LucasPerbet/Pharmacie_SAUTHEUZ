@@ -1,0 +1,74 @@
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><element><id>UMLClass</id><coordinates><x>490</x><y>98</y><w>105</w><h>77</h></coordinates><panel_attributes>Pharmacien
+--
+- id: int
+- nom: string
+- prenom: string
+- identifiant : string
+- mdp: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>497</x><y>231</y><w>91</w><h>98</h></coordinates><panel_attributes>Ordonnance
+--
+- id: int
+- medecin: int
+- patient: int
+- pathologie : int
+- date: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>707</x><y>301</y><w>91</w><h>70</h></coordinates><panel_attributes>Médecin
+--
+- id: int
+- nom: string
+- prenom: string
+- permis : document
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>287</x><y>231</y><w>112</w><h>84</h></coordinates><panel_attributes>Prescription
+--
+- id: int
+- ordonnance: int
+- medicament: int
+- quantite: int
+- duree : int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>434</x><y>385</y><w>63</w><h>63</h></coordinates><panel_attributes>Pathologie
+--
+- id: int
+- nom: string
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>119</x><y>231</y><w>84</w><h>77</h></coordinates><panel_attributes>Médicament
+--
+- id: int
+- nom: string
+- stock : int
+- format: string
+- prix: float
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>693</x><y>189</y><w>112</w><h>91</h></coordinates><panel_attributes>Patient
+--
+- id: int
+- num_secu: string
+- nom: string
+- prenom: string
+- naissance: string
+- mutuelle: int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>917</x><y>196</y><w>63</w><h>63</h></coordinates><panel_attributes>Mutuelle
+--
+- id: int
+- nom: string
+- tel: string
+- mail: string
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>581</x><y>259</y><w>140</w><h>63</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..*
+m2=1</panel_attributes><additional_attributes>180;70;90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>322</y><w>84</w><h>105</h></coordinates><panel_attributes>lt=&lt;-
+
+m1=1
+m2=0..*</panel_attributes><additional_attributes>90;10;90;120;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>196</x><y>245</y><w>105</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
+
+m1=1
+m2=1..*</panel_attributes><additional_attributes>130;20;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>798</x><y>210</y><w>133</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
+
+m1=0..1
+m2=1..*</panel_attributes><additional_attributes>10;30;170;20</additional_attributes></element><element><id>Relation</id><coordinates><x>392</x><y>245</y><w>119</w><h>35</h></coordinates><panel_attributes>lt=&lt;-
+
+m1=1
+m2=1..*</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element><element><id>Relation</id><coordinates><x>581</x><y>224</y><w>126</w><h>28</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..*
+m2=1</panel_attributes><additional_attributes>160;10;10;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>238</x><y>357</y><w>98</w><h>49</h></coordinates><panel_attributes>Auteur :
+Lucas PERBET
+SIO SLAM
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element></diagram>
