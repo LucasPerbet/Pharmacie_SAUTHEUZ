@@ -36,8 +36,19 @@ CREATE TABLE Pharmacien (
     mdp_pharmacien VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE Patient (
+    id_patient BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    num_secu_sociale VARCHAR(15) NOT NULL,
+    nom_patient VARCHAR(50) NOT NULL,
+    prenom_patient VARCHAR(50) NOT NULL,
+    date_naissance DATE NOT NULL,
+    id_mutuelle BIGINT NOT NULL,
+    UNIQUE (num_secu_sociale),
+    FOREIGN KEY (id_mutuelle) REFERENCES Mutuelle (id_mutuelle)
+);
+
 CREATE TABLE Ordonnance (
-    id_ordonnance BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_ordonnance BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     id_patient BIGINT NOT NULL,
     id_medecin BIGINT NOT NULL,
     id_pathologie BIGINT NOT NULL,
@@ -54,16 +65,9 @@ CREATE TABLE Medicament_Ordonnance (
     qte_prescrite BIGINT NOT NULL,
     duree_mois BIGINT NOT NULL,
     FOREIGN KEY (id_medicament) REFERENCES Medicament (id_medicament),
-    FOREIGN KEY (id_ordonnance) REFERENCES Ordonnance (id_ordonnance)
+    FOREIGN KEY (id_ordonnance) REFERENCES Ordonnance (id_ordonnance),
+    INDEX idx_medicament_ordonnance (id_medicament, id_ordonnance)
 );
 
-CREATE TABLE Patient (
-    id_patient BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    num_secu_sociale VARCHAR(255) NOT NULL,
-    nom_patient VARCHAR(255) NOT NULL,
-    prenom_patient VARCHAR(255) NOT NULL,
-    date_naissance DATE NOT NULL,
-    id_mutuelle BIGINT NOT NULL,
-    UNIQUE (num_secu_sociale),
-    FOREIGN KEY (id_mutuelle) REFERENCES Mutuelle (id_mutuelle)
-);
+
+
