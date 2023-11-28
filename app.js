@@ -15,7 +15,7 @@ const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const { urlencoded } = require('body-parser');
 
-const pool = require('./public/config/connexion');
+const pool = require('./public/config/DBconnect.js');
 const routes = require('./routes/routes.js');
 
 /**********************************************************************************************************************************************/

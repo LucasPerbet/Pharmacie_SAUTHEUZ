@@ -18,9 +18,9 @@ const pool = mysql.createPool({
   user: configDB['dev']['user'],
   password: configDB['dev']['password'],
   database: configDB['dev']['database'],
-  waitForConnections: ['dev']['waitForConnections'],
-  connectionLimit: ['dev']['connectionLimit'],
-  queueLimit: ['dev']['queueLimit']
+  waitForConnections: configDB['dev']['waitForConnections'],
+  connectionLimit: configDB['dev']['connectionLimit'],
+  queueLimit: configDB['dev']['queueLimit']
 });
 
 // Exporter le pool pour une utilisation dans d'autres fichiers
