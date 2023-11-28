@@ -4,7 +4,7 @@
  * @description Le contrôleur de l'accueil . En fonction de la route choisie, le contrôleur exécute les actions ci-après.
  */
 
-const controllerDefaut={  
+const controller={  
 	Home(req,res){  
   	    res.render('main')  
 	},
@@ -14,4 +14,4 @@ const controllerDefaut={
 	}
 }  
 
-module.exports = controllerDefaut; 
+module.exports = controller; 

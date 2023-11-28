@@ -5,16 +5,13 @@
 */
 
 const express =  require('express');
-const controller = require('../controllers/controllerPatient');
+const controller = require('../controllers/controller');
 
 // La variable contient l'instance du routeur
 const router = express.Router();  
 
 // Liste des routes utilisables pour Patient
-router.get('/home',controller.homePatient);
-router.post('/add',controller.addPatient);
-router.get('/edit/:id',controller.getPatient);
-router.put('/edit/',controller.editPatient);
-router.get('/delete/:id',controller.deletePatient);
+router.get('/',controller.Home);
+router.get('*',controller.Error);
 
 module.exports = router;

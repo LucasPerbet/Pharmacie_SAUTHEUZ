@@ -14,7 +14,10 @@ const path = require('path');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const { urlencoded } = require('body-parser');
+
 const pool = require('./public/config/connexion');
+const routes = require('./routes/routes.js');
+
 /**********************************************************************************************************************************************/
 
 /************************* ---- Gestion de l'instance Express JS ---- *****************************/
@@ -33,16 +36,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-
-// ********************************Ajouter les routes pour chaque catégorie ***********************************
-const routesDefaut = require('./routes/routesDefaut');
-const routesPatient = require('./routes/routesPatient');
-
-// Gestion des routeurs
-/******************** A faire pour chaque route********s***************************** */
-app.use('/', routesDefaut);
-// Gestion des routes non prévues
-app.use('*', routesDefaut);
+// Gestion des routes
+app.use('/',routes);
 
 // Définition du port de l'application
 const port = process.env.port || 3000;

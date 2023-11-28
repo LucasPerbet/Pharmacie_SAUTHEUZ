@@ -1,0 +1,55 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #F5F5F5;
+}
+
+#container {
+  display: flex;
+  flex: 1;
+}
+
+#sidebar {
+  width: 200px;
+  background-color: #00A86B;
+  color: #F5F5F5;
+}
+
+#content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#footer {
+  flex-shrink: 0;
+  background-color: #00A86B;
+  color: #F5F5F5;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  cursor: pointer; /* Ajout d'un curseur pointer pour indiquer l'interactivité */
+}
+
+#footer:hover {
+  background-color: #d0d0d0; /* Couleur de fond lorsqu'il est survolé */
+}
+
+/* Ajouter ceci à votre fichier CSS existant */
+
+#footer.collapsed {
+  height: 25px; /* Ajustez la hauteur minimale lorsque le footer est basculé */
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
