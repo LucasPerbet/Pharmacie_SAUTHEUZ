@@ -5,13 +5,24 @@
  */
 
 const express = require('express');
+const modelPatient = require('../models/modelPatient');
 
 const patientController = {
 
-    homePatient(req,res){
-        res.render('patientHome')
+async homePatient(req,res){
+    try {
+        let data = await modelPatient.getPatient();
+        if(data) {
+            res.render('patientHome');
+        }else {
+            res.render('patientHome');
+        }
+    }catch (error){
+        console.log(error);
     }
-  
+       
+    }
+
 }
 
 module.exports = patientController;
