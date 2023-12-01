@@ -4,7 +4,84 @@
         <%- include('sidebar') %>
 
             <div id="content">
-                <h1>Test Patient</h1>
-            </div>
+                <h1>Ajouter un patient</h1>
+                <form action="/patient/add" method="POST">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="input-group fluid">
+                                <span class="tooltip" aria-label="Numéro de sécurité sociale"><label for="frmNumSecu">Numéro de sécurité sociale</label></span>
+                                <input type="text" name="num_secu_sociale" id="frmNumSecu" placeholder="Numéro de sécurité sociale">
+                            </div>
+                            <div class="input-group fluid">
+                                <span class="tooltip" aria-label="Nom"><label for="frmNom">Nom</label></span>
+                                <input type="text" name="nom_patient" id="frmNom" placeholder="Nom">
+                            </div>
+                            <div class="input-group fluid">
+                                <label for="frmPrenom">Prenom</label>
+                                <input type="text" name="prenom_patient" id="frmPrenom" placeholder="Prenom">
+                            </div>
+                            <div class="input-group fluid">
+                                <label for="frmDateNaissance">Date de Naissance</label>
+                                <input type="date" name="date_naissance" id="frmDateNaissance" placeholder="JJ/MM/AAAA">
+                            </div>
+                            <div class="input-group fluid">
+                                <label for="frmMutuelle">Mutuelle</label>
+                                <input type="text" name="id_mutuelle" id="frmMutuelle" placeholder="Mutuelle">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="input-group fluid">
+                            <input type="submit" class="primary large" value="Ajouter"><br>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            
+    
+    <br>
+	<% if (data.length> 0) {%>
+		<h1>Liste des patients</h1>
+        <br>
+		<div>
+		<table class="border-fix">
+			<thead>
+				<tr>
+					<th scope="col"> Numéro de sécurité sociale</th>
+					<th scope="col"> Nom </th>
+					<th scope="col"> Prénom </th>
+					<th scope="col"> Date de Naissance </th>
+					<th scope="col"> Mutuelle </th>
+                    <th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(let i=0; i < data.length; i++) {%>
+					<tr>
+						<td>
+                            <%= data[i].num_secu_sociale%>
+						</td>
+						<td>
+							<%= data[i].nom_patient%>
+						</td>
+						<td>
+							<%= data[i].prenom_patient%>
+						</td>
+						<td>
+							<%= data[i].date_naissance%>
+						</td>
+                        <td>
+							<%= data[i].id_mutuelle%>
+						</td>
+
+						<td>
+                            <a href="/patient/edit/<%= data[i].id_patient%>" class="button">Modifier<i class="far fa-edit"></i></a>
+                            <a href="/patient/delete/<%= data[i].id_patient%>" class="button">Supprimer<i class="fas fa-times"></i></a>
+					</tr>
+					<% } %>
+			</tbody>
+		</table>
+		</div>
+		<% } %> 
+    </div>
     </div>
 <%- include('footer') %>
