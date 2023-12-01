@@ -17,6 +17,7 @@ const { urlencoded } = require('body-parser');
 
 const pool = require('./public/config/DBconnect.js');
 const routes = require('./routes/routes.js');
+const patientRoutes = require('./routes/patientRoutes.js');
 
 /**********************************************************************************************************************************************/
 
@@ -37,6 +38,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // Gestion des routes
+app.use('/patient/',patientRoutes);
 app.use('/',routes);
 
 // Définition du port de l'application

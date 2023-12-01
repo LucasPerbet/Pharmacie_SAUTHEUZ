@@ -1,7 +1,7 @@
 /**
  * @author Lucas PERBET
  * @version 1.0.0
- * @description Ce fichier ne contient que les sous-routes pour le chemin /patient/
+ * @description Ce fichier ne contient que les routes principales
 */
 
 const express =  require('express');
