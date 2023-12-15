@@ -19,6 +19,7 @@ const patientController = {
         try {
             let data = await modelPatient.getPatient();
             if (data) {
+
                 res.render('patientHome', { data: data });
             } else {
                 res.render('patientHome', { data: {} });
@@ -139,6 +140,11 @@ const patientController = {
             console.log('error', error)
         }
     }
+}
+
+function formatDate(dateString){
+    const date = new Date(dateString)
+    const isoDate = date.toString().split('T')[0]; //Format AAAA-MM-JJ Code ISMAEL
 }
 
 module.exports = patientController;

@@ -15,7 +15,7 @@ const pool = require('../public/config/DBconnect');
 async function getPatient() {
     try {
         // On récupère la liste des patients avec les dates formatées
-        const [rows, fields] = await pool.query("SELECT id_patient, num_secu_sociale, nom_patient, prenom_patient, DATE_FORMAT(date_naissance, '%d/%m/%Y') as date_naissance, id_mutuelle FROM `patient`");
+        const [rows, fields] = await pool.query("SELECT id_patient, num_secu_sociale, nom_patient, prenom_patient, date_naissance, id_mutuelle FROM `patient`");
 
         // On retourne les données pour les utiliser dans le contrôleur
         return rows;
