@@ -1,56 +1,48 @@
 <%- include('header') %>
 
-<div id="container">
-    <%- include('sidebar') %>
+    <% debugger; %>
+        <% if (id_patient !==undefined) { %>
+            <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
 
-    <div id="content">
-        <h1>Editer un patient</h1>
-        <% debugger; %>
-        <% if (id_patient !== undefined) { %>
-            <form action="/patient/edit" method="POST">
-                <div>
-                    <div class="row">
-                        <input type="text" name="id_patient" hidden value="<%= id_patient %>">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group fluid">
-                                <span class="tooltip" aria-label="Numéro de sécurité sociale">
-                                    <label for="frmNumSecu">Numéro de sécurité sociale</label>
-                                </span>
-                                <input type="text" name="num_secu_sociale" id="frmNumSecu"
-                                    placeholder="Numéro de sécurité sociale" value="<%= num_secu_sociale%>">
-                            </div>
-                            <div class="input-group fluid">
-                                <span class="tooltip" aria-label="Nom">
-                                    <label for="frmNom">Nom</label>
-                                </span>
-                                <input type="text" name="nom_patient" id="frmNom" placeholder="Nom" value="<%= nom_patient%>">
-                            </div>
-                                        <div class="input-group fluid">
-                                            <label for="frmPrenom">Prenom</label>
-                                            <input type="text" name="prenom_patient" id="frmPrenom"
-                                                placeholder="Prenom" value ="<%= prenom_patient%>">
-                                        </div>
-                                        <div class="input-group fluid">
-                                            <label for="frmDateNaissance">Date de Naissance</label>
-                                            <input type="date" name="date_naissance" id="frmDateNaissance"
-                                                placeholder="JJ/MM/AAAA" value ="<%= date_naissance%>">
-                                        </div>
-                                        <div class="input-group fluid">
-                                            <label for="frmMutuelle">Mutuelle</label>
-                                            <input type="text" name="id_mutuelle" id="frmMutuelle"
-                                                placeholder="Mutuelle" value ="<%= id_mutuelle%>">
-                                        </div>
-                                        <input type="submit" class="secondary large" value="Valider"><br>
-                                    </div>
-                                    <div class="input-group fluid">
-                                        <a href="/patient/home" class="button">Annulation</a><br>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
-                </div>
-            <% } else { %>
-            <div class="card error"> Aucune donnée à traiter </div>
-        <% } %>
-    </div>
+                <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer un
+                    patient</h3>
+
+                <form action="/patient/edit" method="POST" class="row g-3 pt-3">
+                    <input type="text" name="id_patient" hidden value="<%= id_patient %>">
+                    <div class="col-md-4">
+                        <label class="form-label" for="nom_patient">Nom</label>
+                        <input class="form-control" type="text" name="nom_patient" id="nom_patient"
+                            value="<%= nom_patient%>">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="prenom_patient">Prenom</label>
+                        <input class="form-control" type="text" name="prenom_patient" id="prenom_patient"
+                            value="<%= prenom_patient%>">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="date_naissance">Date de Naissance</label>
+                        <input class="form-control" type="date" name="date_naissance" id="date_naissance"
+                            value="<%= date_naissance%>">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label" for="num_secu_sociale">Numéro de sécurité sociale</label>
+                        <input class="form-control" type="text" name="num_secu_sociale" id="num_secu_sociale"
+                            placeholder="15 chiffres" value="<%= num_secu_sociale%>">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="id_mutuelle">Mutuelle</label>
+                        <input class="form-control" type="text" name="id_mutuelle" id="id_mutuelle"
+                            placeholder="Identifiant de la mutuelle du patient" value="<%= id_mutuelle%>">
+                    </div>
+                    <div class="col-md-12 text-end py-2">
+                        <button class="btn btn-success" type="submit">Enregistrer</button>
+                        <a href="/patient/home" class="btn btn-danger">Annuler</a><br>
+                    </div>
+                </form>
+
+            </div>
+        <% } else { %>
+        <div class="card error"> Erreur dans l'importation des données</div>
+    <% } %>
+
 <%- include('footer'); %>

@@ -1,75 +1,59 @@
 <%- include('header') %>
     
-    <div id="container">
-        <%- include('sidebar') %>
 
-            <div id="content">
-                <h1>Ajouter une mutuelle</h1>
-                <form action="/mutuelle/add" method="POST">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group fluid">
-                                <span class="tooltip" aria-label="Nom"><label for="frmNom">Nom</label></span>
-                                <input type="text" name="nom_mutuelle" id="frmNom" placeholder="Nom">
-                            </div>
-                            <div class="input-group fluid">
-                                <label for="frmTel">Téléphone</label>
-                                <input type="text" name="tel_mutuelle" id="frmTel" placeholder="Téléphone">
-                            </div>
-                            <div class="input-group fluid">
-                                <label for="frmMail">Mail</label>
-                                <input type="text" name="mail_mutuelle" id="frmMail" placeholder="example@mail.com">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group fluid">
-                            <input type="submit" class="primary large" value="Ajouter"><br>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            
-    
-    <br>
-	<% if (data.length> 0) {%>
-		<h1>Liste des mutuelles</h1>
-        <br>
-		<div>
-		<table class="border-fix">
-			<thead>
-				<tr>
-					<th scope="col"> Id Mutuelle</th>
-					<th scope="col"> Nom </th>
-					<th scope="col"> Téléphone </th>
-					<th scope="col"> Mail </th>
+<br>
+<% if (data.length> 0) {%>
+
+    <div class="container py-2 px-2 my-3">
+        <table class="table table-hover">
+            <thead class="table-success table-bordered">
+                <tr>
+                    <th scope="col"> Id Mutuelle</th>
+                    <th scope="col"> Nom </th>
+                    <th scope="col"> Téléphone </th>
+                    <th scope="col"> Mail </th>
                     <th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% for(let i=0; i < data.length; i++) {%>
-					<tr>
-						<td>
-                            <%= data[i].id_mutuelle%>
-						</td>
-						<td>
-							<%= data[i].nom_mutuelle%>
-						</td>
-						<td>
-							<%= data[i].tel_mutuelle%>
-						</td>
-						<td>
-							<%= data[i].mail_mutuelle%>
-						</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < data.length; i++) {%>
+                    <tr>
+                        <td><%= data[i].id_mutuelle%></td>
+                        <td><%= data[i].nom_mutuelle%></td>
+                        <td><%= data[i].tel_mutuelle%></td>
+                        <td><%= data[i].mail_mutuelle%></td>
+                        <td>
+                            <a href="/mutuelle/edit/<%= data[i].id_mutuelle%>" class="btn"><i class="bi bi-pencil-square"></i></a>
+                            <a href="/mutuelle/delete/<%= data[i].id_mutuelle%>" class="btn"><i class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        
+    </div>
+    <% } %> 
+</div>
 
-						<td>
-                            <a href="/mutuelle/edit/<%= data[i].id_mutuelle%>" class="button">Modifier<i class="far fa-edit"></i></a>
-                            <a href="/mutuelle/delete/<%= data[i].id_mutuelle%>" class="button">Supprimer<i class="fas fa-times"></i></a>
-					</tr>
-					<% } %>
-			</tbody>
-		</table>
-		</div>
-		<% } %> 
-    </div>
-    </div>
+<div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+    <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter une mutuelle</h3>
+    <form action="/mutuelle/add" method="POST" class="row g-3 pt-3">
+        <div class="col-md-6">
+            <label class="form-label" for="frmNom">Nom</label>
+            <input class="form-control" type="text" name="nom_mutuelle" id="frmNom" placeholder="Nom">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="frmTel">Téléphone</label>
+            <input class="form-control" type="text" name="tel_mutuelle" id="frmTel" placeholder="Téléphone">
+        </div>
+        <div class="col-md-10">
+            <label class="form-label" for="frmMail">Mail</label>
+            <input class="form-control" type="text" name="mail_mutuelle" id="frmMail" placeholder="example@mail.com">
+        </div>
+        <div class="col-md-2 text-end pt-4 pl-4">
+            <button class="btn btn-success" type="submit">Ajouter</button>
+        </div>
+    </form>
+</div>
+
 <%- include('footer') %>

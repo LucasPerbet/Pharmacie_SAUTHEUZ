@@ -1,7 +1,7 @@
 /**
  * @author Lucas PERBET
  * @version 1.0.0
- * @description Le contrôleur des patients . En fonction de la route choisie, le contrôleur exécute les actions ci-après.
+ * @description Le contrôleur des patients. En fonction de la route choisie, le contrôleur exécute les actions ci-après.
  */
 
 const express = require('express');
@@ -19,7 +19,6 @@ const patientController = {
         try {
             let data = await modelPatient.getPatient();
             if (data) {
-
                 res.render('patientHome', { data: data });
             } else {
                 res.render('patientHome', { data: {} });
@@ -27,14 +26,14 @@ const patientController = {
         } catch (error) {
             console.log(error);
         }
-
     },
 
+
     /**
- * Fonction permettant l'ajout d'un patient (méthode POST)
- * @param {*} req requete permettant de récupérer les données
- * @param {*} res réponse avec une redirection
- */
+     * Fonction permettant l'ajout d'un patient (méthode POST)
+     * @param {*} req requete permettant de récupérer les données
+     * @param {*} res réponse avec une redirection
+     */
 
     async addPatient(req, res) {
         try {
@@ -93,37 +92,38 @@ const patientController = {
         try {
             let id_patient = req.params.id;
             let data = await modelPatient.findPatient(id_patient);
-    
-            // Check if any results were found
+
             if (data.length > 0) {
-                // Assuming you want to work with the first result (you may loop through all if needed)
+                // On récupère les informations du patient
                 const patient = data[0];
-                
-                // Render the 'patientEdit' view with the patient data
-                res.render('patientEdit', { id_patient: patient.id_patient, num_secu_sociale: patient.num_secu_sociale,
-                                            nom_patient:patient.nom_patient, prenom_patient: patient.prenom_patient, 
-                                            date_naissance: patient.date_naissance, id_mutuelle: patient.id_mutuelle});
+
+                // Rendu de la vue 'patientEdit'
+                res.render('patientEdit', {
+                    id_patient: patient.id_patient, num_secu_sociale: patient.num_secu_sociale,
+                    nom_patient: patient.nom_patient, prenom_patient: patient.prenom_patient,
+                    date_naissance: patient.date_naissance, id_mutuelle: patient.id_mutuelle
+                });
             } else {
-                // If no data is found, render 'patientEdit' with an empty data object
+                // S'il n'y a pas de données la vue  'patientEdit' est affichée sans données
                 res.render('patientEdit', { id_patient, data: {} });
             }
         } catch (error) {
-            console.log('Error in patient edit route:', error);
-            // You might want to handle the error more gracefully, e.g., redirect to an error page
+            console.log('Erreur sur la route patientEdit:', error);
+
             res.status(500).send('Internal Server Error');
         }
     },
 
-        /**
-     * Fonctionpermettant la modification d'un profil
-     * @param {*} req requete permettant de récupérer les infos du patient
-     * @param {*} res réponse contenant le formulaire d'édition des données du patient
-     */
+    /**
+ * Fonction permettant la modification d'un profil
+ * @param {*} req requete permettant de récupérer les infos du patient
+ * @param {*} res réponse contenant le formulaire d'édition des données du patient
+ */
     async editPatient(req, res) {
         try {
             // Les données sont récupérées dans le corps de la requête
             const patient = {
-                id_patient : req.body.id_patient,
+                id_patient: req.body.id_patient,
                 num_secu_sociale: req.body.num_secu_sociale,
                 nom_patient: req.body.nom_patient,
                 prenom_patient: req.body.prenom_patient,
@@ -131,20 +131,15 @@ const patientController = {
                 id_mutuelle: req.body.id_mutuelle
             };
 
-            
+
             let data = await modelPatient.editPatient(patient);
-            if (data)  {
+            if (data) {
                 res.redirect('/patient/home');
             }
         } catch (error) {
             console.log('error', error)
         }
     }
-}
-
-function formatDate(dateString){
-    const date = new Date(dateString)
-    const isoDate = date.toString().split('T')[0]; //Format AAAA-MM-JJ Code ISMAEL
 }
 
 module.exports = patientController;

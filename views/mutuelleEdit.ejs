@@ -1,43 +1,31 @@
 <%- include('header') %>
 
-<div id="container">
-    <%- include('sidebar') %>
-
-    <div id="content">
-        <h1>Editer une mutuelle</h1>
-        <% debugger; %>
-        <% if (id_mutuelle !== undefined) { %>
-            <form action="/mutuelle/edit" method="POST">
-                <div>
-                    <div class="row">
-                        <input type="text" name="id_mutuelle" hidden value="<%= id_mutuelle %>">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="input-group fluid">
-                                <span class="tooltip" aria-label="Nom">
-                                    <label for="frmNom">Nom</label>
-                                </span>
-                                <input type="text" name="nom_mutuelle" id="frmNom" placeholder="Nom" value="<%= nom_mutuelle%>">
-                            </div>
-                            <div class="input-group fluid">
-                                <label for="frmTel">Téléphone</label>
-                                <input type="text" name="tel_mutuelle" id="frmTel" placeholder="Téléphone" value="<%= tel_mutuelle%>">
-                            </div>
-                            <div class="input-group fluid">
-                                <label for="frmMail">Mail</label>
-                                <input type="text" name="mail_mutuelle" id="frmMail" placeholder="example@mail.com" value="<%= mail_mutuelle%>">
-                            </div>
-                        </div>
-                                        <input type="submit" class="secondary large" value="Valider"><br>
-                                    </div>
-                                    <div class="input-group fluid">
-                                        <a href="/mutuelle/home" class="button">Annulation</a><br>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
-                </div>
-            <% } else { %>
-            <div class="card error"> Aucune donnée à traiter </div>
-        <% } %>
+<% debugger; %>
+<% if (id_mutuelle !== undefined) { %>
+    <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+        <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer une mutuelle</h3>
+        <form action="/mutuelle/edit" method="POST" class="row g-3 pt-3">
+            <input type="text" name="id_mutuelle" hidden value="<%= id_mutuelle %>">
+            <div class="col-md-6">
+                <label class="form-label" for="frmNom">Nom</label>
+                <input class="form-control" type="text" name="nom_mutuelle" id="frmNom" value="<%= nom_mutuelle%>">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="frmTel">Téléphone</label>
+                <input class="form-control" type="text" name="tel_mutuelle" id="frmTel" value="<%= tel_mutuelle%>">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="frmMail">Mail</label>
+                <input class="form-control" type="text" name="mail_mutuelle" id="frmMail" placeholder="example@mail.com" value="<%= mail_mutuelle%>">
+            </div>
+            <div class="col-md-12 text-end py-2">
+                <button class="btn btn-success" type="submit">Valider</button>
+                <a href="/mutuelle/home" class="btn btn-danger">Annuler</a><br>
+            </div>
+        </form>
     </div>
+<% } else { %>
+    <div class="card error"> Aucune donnée à traiter </div>
+<% } %>
+
 <%- include('footer'); %>

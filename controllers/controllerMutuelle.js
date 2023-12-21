@@ -58,27 +58,37 @@ const mutuelleController = {
 
     async findMutuelle(req, res) {
         try {
+            // Récupérer l'identifiant de la mutuelle depuis les paramètres de la requête
             let id_mutuelle = req.params.id;
+    
+            // Rechercher les données de la mutuelle de manière asynchrone en utilisant le modèle
             let data = await modelMutuelle.findMutuelle(id_mutuelle);
     
-            // Check if any results were found
+            // Vérifier si des résultats ont été trouvés
             if (data.length > 0) {
-                // Assuming you want to work with the first result (you may loop through all if needed)
+                // Supposons que vous souhaitez travailler avec le premier résultat (vous pouvez parcourir tous les résultats si nécessaire)
                 const mutuelle = data[0];
-                
-                // Render the 'mutuelleEdit' view with the mutuelle data
-                res.render('mutuelleEdit', { id_mutuelle: mutuelle.id_mutuelle, nom_mutuelle:mutuelle.nom_mutuelle, 
-                                            tel_mutuelle: mutuelle.tel_mutuelle, mail_mutuelle: mutuelle.mail_mutuelle});
+    
+                // Rendre la vue 'mutuelleEdit' avec les données de la mutuelle
+                res.render('mutuelleEdit', {
+                    id_mutuelle: mutuelle.id_mutuelle,
+                    nom_mutuelle: mutuelle.nom_mutuelle,
+                    tel_mutuelle: mutuelle.tel_mutuelle,
+                    mail_mutuelle: mutuelle.mail_mutuelle
+                });
             } else {
-                // If no data is found, render 'mutuelleEdit' with an empty data object
+                // Si aucune donnée n'est trouvée, rendre 'mutuelleEdit' avec un objet de données vide
                 res.render('mutuelleEdit', { id_mutuelle, data: {} });
             }
         } catch (error) {
-            console.log('Error in mutuelle edit route:', error);
-            // You might want to handle the error more gracefully, e.g., redirect to an error page
-            res.status(500).send('Internal Server Error');
+            // Gérer les erreurs en affichant un message dans la console
+            console.log('Erreur sur la route mutuelleEdit :', error);
+    
+            // Envoyer une réponse HTTP 500 en cas d'erreur interne du serveur
+            res.status(500).send('Erreur interne du serveur');
         }
     },
+    
 
         /**
      * Fonction qui supprime un Mutuelle (par son ID)
@@ -90,7 +100,7 @@ const mutuelleController = {
                 let data = modelMutuelle.deleteMutuelle(req.params.id);
                 if (data) {
                     res.redirect('/mutuelle/home');
-                    console.log("Mutuelle supprimé !")
+                    console.log("Mutuelle supprimée !")
                 }
             } catch (error) {
                 console.log('error', error);
