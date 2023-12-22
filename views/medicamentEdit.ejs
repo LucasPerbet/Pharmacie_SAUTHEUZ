@@ -1,0 +1,39 @@
+<%- include('header') %>
+
+<% debugger; %>
+<% if (id_medicament !== undefined) { %>
+    <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+        <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer un médicament</h3>
+        <form action="/medicament/edit" method="POST" class="row g-3 pt-3">
+            <input type="text" name="id_medicament" hidden value="<%= id_medicament %>">
+            <div class="col-md-6">
+                <label class="form-label" for="frmNom">Nom Médicament</label>
+                <input class="form-control" type="text" name="nom_medicament" id="frmNom" value="<%= nom_medicament %>">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="frmQte">Quantité en Stock</label>
+                <input class="form-control" type="text" name="qte_en_stock" id="frmQte" value="<%= qte_en_stock %>">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label" for="frmFormat">Format Médicament</label>
+                <select class="form-control" name="format_medicament" id="frmFormat">
+                    <option value="Boite">Boite</option>
+                    <option value="Tube">Tube</option>
+                    <option value="Flacon">Flacon</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="frmPrix">Prix Médicament</label>
+                <input class="form-control" type="text" name="prix_medicament" id="frmPrix" value="<%= prix_medicament %>">
+            </div>
+            <div class="col-md-12 text-end py-2">
+                <button class="btn btn-success" type="submit">Valider</button>
+                <a href="/medicament/home" class="btn btn-danger">Annuler</a><br>
+            </div>
+        </form>
+    </div>
+<% } else { %>
+    <div class="card error"> Aucune donnée à traiter </div>
+<% } %>
+
+<%- include('footer'); %>

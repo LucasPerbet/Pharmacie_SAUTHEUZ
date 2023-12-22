@@ -19,6 +19,7 @@ const pool = require('./public/config/DBconnect.js');
 const routes = require('./routes/routes.js');
 const patientRoutes = require('./routes/patientRoutes.js');
 const mutuelleRoutes = require('./routes/mutuelleRoutes.js');
+const medicamentRoutes = require('./routes/medicamentRoutes.js');
 
 /**********************************************************************************************************************************************/
 
@@ -39,6 +40,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // Gestion des routes
+app.use('/medicament/',medicamentRoutes);
 app.use('/patient/',patientRoutes);
 app.use('/mutuelle/',mutuelleRoutes);
 app.use('/',routes);

@@ -1,48 +1,49 @@
 <%- include('header') %>
 
-    <% debugger; %>
-        <% if (id_patient !==undefined) { %>
-            <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+<% debugger; %>
+<% if (id_patient !== undefined) { %>
+    <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
 
-                <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer un
-                    patient</h3>
+        <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer un patient</h3>
 
-                <form action="/patient/edit" method="POST" class="row g-3 pt-3">
-                    <input type="text" name="id_patient" hidden value="<%= id_patient %>">
-                    <div class="col-md-4">
-                        <label class="form-label" for="nom_patient">Nom</label>
-                        <input class="form-control" type="text" name="nom_patient" id="nom_patient"
-                            value="<%= nom_patient%>">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="prenom_patient">Prenom</label>
-                        <input class="form-control" type="text" name="prenom_patient" id="prenom_patient"
-                            value="<%= prenom_patient%>">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="date_naissance">Date de Naissance</label>
-                        <input class="form-control" type="date" name="date_naissance" id="date_naissance"
-                            value="<%= date_naissance%>">
-                    </div>
-                    <div class="col-md-8">
-                        <label class="form-label" for="num_secu_sociale">Numéro de sécurité sociale</label>
-                        <input class="form-control" type="text" name="num_secu_sociale" id="num_secu_sociale"
-                            placeholder="15 chiffres" value="<%= num_secu_sociale%>">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="id_mutuelle">Mutuelle</label>
-                        <input class="form-control" type="text" name="id_mutuelle" id="id_mutuelle"
-                            placeholder="Identifiant de la mutuelle du patient" value="<%= id_mutuelle%>">
-                    </div>
-                    <div class="col-md-12 text-end py-2">
-                        <button class="btn btn-success" type="submit">Enregistrer</button>
-                        <a href="/patient/home" class="btn btn-danger">Annuler</a><br>
-                    </div>
-                </form>
-
+        <form action="/patient/edit" method="POST" class="row g-3 pt-3">
+            <input type="text" name="id_patient" hidden value="<%= id_patient %>">
+            <div class="col-md-4">
+                <label class="form-label" for="nom_patient">Nom</label>
+                <input class="form-control" type="text" name="nom_patient" id="nom_patient" value="<%= nom_patient%>">
             </div>
-        <% } else { %>
-        <div class="card error"> Erreur dans l'importation des données</div>
-    <% } %>
+            <div class="col-md-4">
+                <label class="form-label" for="prenom_patient">Prenom</label>
+                <input class="form-control" type="text" name="prenom_patient" id="prenom_patient" value="<%= prenom_patient%>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="date_naissance">Date de Naissance</label>
+                <input class="form-control" type="date" name="date_naissance" id="date_naissance" value="<%= date_naissance%>">
+            </div>
+            <div class="col-md-8">
+                <label class="form-label" for="num_secu_sociale">Numéro de sécurité sociale</label>
+                <input class="form-control" type="text" name="num_secu_sociale" id="num_secu_sociale" placeholder="15 chiffres" value="<%= num_secu_sociale%>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="id_mutuelle">Mutuelle</label>
+                <select class="form-control" name="id_mutuelle" id="id_mutuelle">
+                    <% mutuelles.forEach(mutuelle => { %>
+                        <option value="<%= mutuelle.id_mutuelle %>" <%= mutuelle.id_mutuelle === id_mutuelle ? 'selected' : '' %>>
+                            <%= mutuelle.nom_mutuelle %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+            <div class="col-md-12 text-end py-2">
+                <button class="btn btn-success" type="submit">Enregistrer</button>
+                <a href="/patient/home" class="btn btn-danger">Annuler</a><br>
+            </div>
+        </form>
+
+    </div>
+<% } else { %>
+    <div class="card error">Erreur dans l'importation des données</div>
+<% } %>
+
 
 <%- include('footer'); %>

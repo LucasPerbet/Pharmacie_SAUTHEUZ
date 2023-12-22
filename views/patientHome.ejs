@@ -1,42 +1,38 @@
 <%- include('header') %>
 
-
 <div class="container py-2 px-2 my-3">
-    <% if (data.length> 0) {%>        
-    <table class="table  table-hover "> 
-        <thead class="table-success table-bordered">                         
-            <tr>
-                <th scope="col"> Nom </th>
-                <th scope="col"> Prénom </th>
-                <th scope="col"> Date de Naissance </th>
-                <th scope="col"> Numéro de sécurité sociale</th>
-                <th scope="col"> Mutuelle </th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for(let i=0; i < data.length; i++) {%>
-            <tr>
-                <td><%= data[i].nom_patient%></td>
-                <td><%= data[i].prenom_patient%></td>
-                <td><%= data[i].date_naissance%></td>
-                <td><%= data[i].num_secu_sociale%></td>
-                <td><%= data[i].id_mutuelle%></td>
-            <td>
-                <a class="btn" href="/patient/edit/<%= data[i].id_patient%>"><i class="bi bi-pencil-square"></i></a>
-                <a class="btn" href="/patient/delete/<%= data[i].id_patient%>" ><i class="bi bi-x-square"></i></a>
-            </td>
-            </tr>
-            <% } %>
-        </tbody>
-    </table>
+    <% if (patients.length > 0) {%>        
+        <table class="table table-hover "> 
+            <thead class="table-success table-bordered">                         
+                <tr>
+                    <th scope="col"> Nom </th>
+                    <th scope="col"> Prénom </th>
+                    <th scope="col"> Date de Naissance </th>
+                    <th scope="col"> Numéro de sécurité sociale</th>
+                    <th scope="col"> Mutuelle </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < patients.length; i++) {%>
+                    <tr>
+                        <td><%= patients[i].nom_patient %></td>
+                        <td><%= patients[i].prenom_patient %></td>
+                        <td><%= patients[i].date_naissance %></td>
+                        <td><%= patients[i].num_secu_sociale %></td>
+                        <td><%= patients[i].nom_mutuelle %></td>
+                        <td>
+                            <a class="btn" href="/patient/edit/<%= patients[i].id_patient %>"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn" href="/patient/delete/<%= patients[i].id_patient %>"><i class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
     <% } %> 
 </div>
 
-
-
 <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
-    
     <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter un nouveau patient</h3>
     <form action="/patient/add" method="POST" class="row g-3 pt-3">
         <div class="col-md-4">
@@ -57,12 +53,16 @@
         </div>
         <div class="col-md-4">
             <label class="form-label" for="id_mutuelle">Mutuelle</label>
-            <input class="form-control" type="text" name="id_mutuelle" id="id_mutuelle" placeholder="Identifiant de la mutuelle du patient">
+            <select class="form-control" name="id_mutuelle" id="id_mutuelle">
+                <% mutuelles.forEach(mutuelle => { %>
+                    <option value="<%= mutuelle.id_mutuelle %>"><%= mutuelle.nom_mutuelle %></option>
+                <% }); %>
+            </select>
         </div>
         <div class="col-md-12 text-end py-2">
             <button class="btn btn-success" type="submit">Envoyer</button>
         </div>
     </form>
-</div> <!--Fin du container-->
+</div>
 
 <%- include('footer') %>

@@ -1,0 +1,66 @@
+<%- include('header') %>
+
+<br>
+<% if (data.length > 0) { %>
+    <div class="container py-2 px-2 my-3">
+        <table class="table table-hover">
+            <thead class="table-success table-bordered">
+                <tr>
+                    <th scope="col"> ID Médicament </th>
+                    <th scope="col"> Nom Médicament </th>
+                    <th scope="col"> Quantité en Stock </th>
+                    <th scope="col"> Format Médicament </th>
+                    <th scope="col"> Prix Médicament </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= data[i].id_medicament %></td>
+                        <td><%= data[i].nom_medicament %></td>
+                        <td><%= data[i].qte_en_stock %></td>
+                        <td><%= data[i].format_medicament %></td>
+                        <td><%= data[i].prix_medicament %></td>
+                        <td>
+                            <a href="/medicament/edit/<%= data[i].id_medicament %>" class="btn"><i class="bi bi-pencil-square"></i></a>
+                            <a href="/medicament/delete/<%= data[i].id_medicament %>" class="btn"><i class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+<% } %>
+
+<div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+    <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter un médicament</h3>
+    <form action="/medicament/add" method="POST" class="row g-3 pt-3">
+        <div class="col-md-6">
+            <label class="form-label" for="frmNom">Nom Médicament</label>
+            <input class="form-control" type="text" name="nom_medicament" id="frmNom" placeholder="Nom Médicament">
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="frmQte">Quantité en Stock</label>
+            <input class="form-control" type="text" name="qte_en_stock" id="frmQte" placeholder="Quantité en Stock">
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" for="frmFormat">Format Médicament</label>
+            <select class="form-control" name="format_medicament" id="frmFormat">
+                <option value="Boite">Boite</option>
+                <option value="Tube">Tube</option>
+                <option value="Flacon">Flacon</option>
+            </select>
+        </div>
+        
+        <div class="col-md-6">
+            <label class="form-label" for="frmPrix">Prix Médicament</label>
+            <input class="form-control" type="text" name="prix_medicament" id="frmPrix" placeholder="Prix Médicament">
+        </div>
+        <div class="col-md-6 text-end pt-4 pl-4">
+            <button class="btn btn-success" type="submit">Ajouter</button>
+        </div>
+    </form>
+</div>
+
+<%- include('footer') %>

@@ -6,22 +6,43 @@
 
 const express = require('express');
 const modelPatient = require('../models/modelPatient');
+const modelMutuelle = require('../models/modelMutuelle');
+
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const isoDate = date.toISOString().split('T')[0]; // Format AAAA-MM-JJ
+    return isoDate;
+  }
 
 const patientController = {
 
     /**
-     * Fonction permettant d'afficher la liste des patients 
+     * Fonction permettant d'afficher la liste des patients
      * @param {*} req non utilisé
      * @param {*} res réponse des données lues avec getPatient()
      */
 
     async homePatient(req, res) {
         try {
-            let data = await modelPatient.getPatient();
-            if (data) {
-                res.render('patientHome', { data: data });
+            // Récupérez la liste des patients
+            let patients = await modelPatient.getPatient();
+    
+            // Récupérez la liste des mutuelles
+            let mutuelles = await modelMutuelle.getMutuelle();
+    
+            if (patients && mutuelles) {
+                // Formatage de la date pour chaque patient
+                patients = patients.map(patient => {
+                    return {
+                        ...patient,
+                        date_naissance: formatDate(patient.date_naissance)
+                    };
+                });
+                console.log(patients)
+                res.render('patientHome', { patients, mutuelles });
             } else {
-                res.render('patientHome', { data: {} });
+                res.render('patientHome', { patients: [], mutuelles: [] });
             }
         } catch (error) {
             console.log(error);
@@ -91,28 +112,33 @@ const patientController = {
     async findPatient(req, res) {
         try {
             let id_patient = req.params.id;
-            let data = await modelPatient.findPatient(id_patient);
-
-            if (data.length > 0) {
-                // On récupère les informations du patient
-                const patient = data[0];
-
-                // Rendu de la vue 'patientEdit'
+            let patientData = await modelPatient.findPatient(id_patient);
+            let mutuellesData = await modelMutuelle.getMutuelle(); 
+    
+            if (patientData.length > 0) {
+                const patient = patientData[0];
+                // Formater la date en utilisant la fonction formatDate
+                 const formattedDate = formatDate(patient.date_naissance);
+                // Rendre la vue 'patientEdit' avec les données du patient et des mutuelles
                 res.render('patientEdit', {
-                    id_patient: patient.id_patient, num_secu_sociale: patient.num_secu_sociale,
-                    nom_patient: patient.nom_patient, prenom_patient: patient.prenom_patient,
-                    date_naissance: patient.date_naissance, id_mutuelle: patient.id_mutuelle
+                    id_patient: patient.id_patient,
+                    num_secu_sociale: patient.num_secu_sociale,
+                    nom_patient: patient.nom_patient,
+                    prenom_patient: patient.prenom_patient,
+                    date_naissance: formattedDate,
+                    id_mutuelle: patient.id_mutuelle,
+                    mutuelles: mutuellesData, // Transmettre les données des mutuelles au modèle
                 });
             } else {
-                // S'il n'y a pas de données la vue  'patientEdit' est affichée sans données
-                res.render('patientEdit', { id_patient, data: {} });
+                // S'il n'y a pas de données, rendre la vue 'patientEdit' sans données
+                res.render('patientEdit', { id_patient, data: {}, mutuelles: mutuellesData });
             }
         } catch (error) {
-            console.log('Erreur sur la route patientEdit:', error);
-
-            res.status(500).send('Internal Server Error');
+            console.log('Erreur sur la route patientEdit :', error);
+            res.status(500).send('Erreur interne du serveur');
         }
     },
+    
 
     /**
  * Fonction permettant la modification d'un profil
