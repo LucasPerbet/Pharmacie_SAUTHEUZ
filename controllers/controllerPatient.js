@@ -39,7 +39,7 @@ const patientController = {
                         date_naissance: formatDate(patient.date_naissance)
                     };
                 });
-                console.log(patients)
+
                 res.render('patientHome', { patients, mutuelles });
             } else {
                 res.render('patientHome', { patients: [], mutuelles: [] });

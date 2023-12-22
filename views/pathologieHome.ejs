@@ -1,0 +1,40 @@
+<%- include('header') %>
+
+<div class="container py-2 px-2 my-3">
+    <% if (pathologies.length > 0) {%>        
+        <table class="table table-hover "> 
+            <thead class="table-success table-bordered">                         
+                <tr>
+                    <th scope="col"> Nom de la Pathologie </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < pathologies.length; i++) {%>
+                    <tr>
+                        <td><%= pathologies[i].nom_pathologie %></td>
+                        <td>
+                            <a class="btn" href="/pathologie/edit/<%= pathologies[i].id_pathologie %>"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn" href="/pathologie/delete/<%= pathologies[i].id_pathologie %>"><i class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %> 
+</div>
+
+<div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+    <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter une nouvelle Pathologie</h3>
+    <form action="/pathologie/add" method="POST" class="row g-3 pt-3">
+        <div class="col-md-8">
+            <label class="form-label" for="nom_pathologie">Nom de la Pathologie</label>
+            <input class="form-control" type="text" name="nom_pathologie" id="nom_pathologie">
+        </div>
+        <div class="col-md-12 text-end py-2">
+            <button class="btn btn-success" type="submit">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+<%- include('footer') %>

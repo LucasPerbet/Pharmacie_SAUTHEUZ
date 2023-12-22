@@ -1,0 +1,23 @@
+<%- include('header') %>
+
+<% debugger; %>
+<% if (id_pathologie !== undefined) { %>
+    <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+        <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Éditer une Pathologie</h3>
+        <form action="/pathologie/edit" method="POST" class="row g-3 pt-3">
+            <input type="text" name="id_pathologie" hidden value="<%= id_pathologie %>">
+            <div class="col-md-8">
+                <label class="form-label" for="nom_pathologie">Nom de la Pathologie</label>
+                <input class="form-control" type="text" name="nom_pathologie" id="nom_pathologie" value="<%= nom_pathologie %>">
+            </div>
+            <div class="col-md-12 text-end py-2">
+                <button class="btn btn-success" type="submit">Enregistrer</button>
+                <a href="/pathologie/home" class="btn btn-danger">Annuler</a><br>
+            </div>
+        </form>
+    </div>
+<% } else { %>
+    <div class="card error">Erreur dans l'importation des données</div>
+<% } %>
+
+<%- include('footer'); %>

@@ -1,7 +1,7 @@
 /**
  * @author Lucas PERBET
  * @version 1.0.0
- * @description Ce fichier ne contient que les sous-routes pour le chemin /stocks/
+ * @description Ce fichier ne contient que les sous-routes pour le chemin /medicament/
 */
 
 const express = require('express');

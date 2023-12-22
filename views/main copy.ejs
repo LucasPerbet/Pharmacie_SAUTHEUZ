@@ -1,0 +1,67 @@
+<%- include('header') %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container d-flex justify-content-center align-items-center">
+
+      <div class="text-center mt-3">
+        <h3 class="mb-3 py-3 text-success border-bottom border-2 border-success border-opacity-50 text-start">Stocks de médicaments</h3>
+        <canvas class="w-75 h-75 text-center" id="medicamentChart"></canvas>
+      </div>
+      
+  </div>
+
+
+
+<script>
+    const dataString = "<%= JSON.stringify(data) %>";
+    console.log("Data string:", dataString);
+    const data = JSON.parse(dataString.replace(/&#34;/g, '"'));
+    console.log(data[0].nom_medicament);
+
+    const labels = data.map(function (medicament) {
+            return medicament.nom_medicament;
+        });
+
+        const quantities = data.map(function (medicament) {
+            return medicament.qte_en_stock;
+        });
+
+// Palette de couleurs
+var colors = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+            // Ajoutez autant de couleurs que nécessaire
+        ];
+
+        var colorArray = data.map(function (_, index) {
+            return colors[index % colors.length];
+        });
+
+        var ctx = document.getElementById('medicamentChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Quantité en stock',
+                    data: quantities,
+                    backgroundColor: colorArray,
+                    borderColor: colorArray.map(color => color.replace('0.2', '1')), // Utilisez la version pleine de l'opacité
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+</script>
+
+<%- include('footer') %>

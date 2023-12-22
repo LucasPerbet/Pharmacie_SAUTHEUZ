@@ -1,0 +1,79 @@
+<%- include('header') %>
+
+<div class="container py-2 px-2 my-3">
+    <% if (prescriptions.length > 0) {%>
+        <table class="table table-hover ">
+            <thead class="table-success table-bordered">
+                <tr>
+                    <th scope="col">Prescription</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Médicament</th>
+                    <th scope="col">Date Prescription</th>
+                    <th scope="col">Posologie</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < prescriptions.length; i++) {%>
+                    <tr>
+                        <td><%= prescriptions[i].id_prescription %></td>
+                        <!-- Afficher le nom et prénom du patient -->
+                        <td><%= prescriptions[i].nom_patient %> <%= prescriptions[i].prenom_patient %></td>
+                        <!-- Afficher le nom du médicament -->
+                        <td><%= prescriptions[i].nom_medicament %></td>
+                        <td><%= prescriptions[i].date_prescription %></td>
+                        <td><%= prescriptions[i].posologie %></td>
+                        <td>
+                            <a class="btn" href="/prescription/edit/<%= prescriptions[i].id_prescription %>"><i
+                                    class="bi bi-pencil-square"></i></a>
+                            <a class="btn"
+                                href="/prescription/delete/<%= prescriptions[i].id_prescription %>"><i
+                                    class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+
+
+<div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+    <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter une nouvelle
+        prescription</h3>
+    <form action="/prescription/add" method="POST" class="row g-3 pt-3">
+        <div class="col-md-4">
+            <label class="form-label" for="id_patient">Patient</label>
+            <select class="form-control" name="id_patient" id="id_patient">
+                <% patients.forEach(patient => { %>
+                    <option value="<%= patient.id_patient %>">
+                        <%= patient.nom_patient %> <%= patient.prenom_patient %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="id_medicament">Médicament</label>
+            <select class="form-control" name="id_medicament" id="id_medicament">
+                <% medicaments.forEach(medicament => { %>
+                    <option value="<%= medicament.id_medicament %>">
+                        <%= medicament.nom_medicament %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="date_prescription">Date de Prescription</label>
+            <input class="form-control" type="date" name="date_prescription" id="date_prescription">
+        </div>
+        <div class="col-md-8">
+            <label class="form-label" for="posologie">Posologie</label>
+            <input class="form-control" type="text" name="posologie" id="posologie">
+        </div>
+        <div class="col-md-12 text-end py-2">
+            <button class="btn btn-success" type="submit">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+<%- include('footer') %>

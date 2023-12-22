@@ -1,0 +1,46 @@
+<%- include('header') %>
+
+<div class="container py-2 px-2 my-3">
+    <% if (medecins.length > 0) {%>        
+        <table class="table table-hover "> 
+            <thead class="table-success table-bordered">                         
+                <tr>
+                    <th scope="col"> Nom </th>
+                    <th scope="col"> Prénom </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < medecins.length; i++) {%>
+                    <tr>
+                        <td><%= medecins[i].nom_medecin %></td>
+                        <td><%= medecins[i].prenom_medecin %></td>
+                        <td>
+                            <a class="btn" href="/medecin/edit/<%= medecins[i].id_medecin %>"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn" href="/medecin/delete/<%= medecins[i].id_medecin %>"><i class="bi bi-x-square"></i></a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %> 
+</div>
+
+<div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+    <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Ajouter un nouveau médecin</h3>
+    <form action="/medecin/add" method="POST" class="row g-3 pt-3">
+        <div class="col-md-4">
+            <label class="form-label" for="nom_medecin">Nom</label>
+            <input class="form-control" type="text" name="nom_medecin" id="nom_medecin">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="prenom_medecin">Prenom</label>
+            <input class="form-control" type="text" name="prenom_medecin" id="prenom_medecin">
+        </div>
+        <div class="col-md-12 text-end py-2">
+            <button class="btn btn-success" type="submit">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+<%- include('footer') %>

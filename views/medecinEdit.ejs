@@ -1,0 +1,30 @@
+<%- include('header') %>
+
+<% debugger; %>
+<% if (id_medecin !== undefined) { %>
+    <div class="container mt-3 px-3 py-3 bg-light border border-3 rounded border-dark border-opacity-50">
+
+        <h3 class="mb-3 pb-3 text-success border-bottom border-2 border-success border-opacity-50">Editer un médecin</h3>
+
+        <form action="/medecin/edit" method="POST" class="row g-3 pt-3">
+            <input type="text" name="id_medecin" hidden value="<%= id_medecin %>">
+            <div class="col-md-4">
+                <label class="form-label" for="nom_medecin">Nom</label>
+                <input class="form-control" type="text" name="nom_medecin" id="nom_medecin" value="<%= nom_medecin%>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label" for="prenom_medecin">Prenom</label>
+                <input class="form-control" type="text" name="prenom_medecin" id="prenom_medecin" value="<%= prenom_medecin%>">
+            </div>
+            <div class="col-md-12 text-end py-2">
+                <button class="btn btn-success" type="submit">Enregistrer</button>
+                <a href="/medecin/home" class="btn btn-danger">Annuler</a><br>
+            </div>
+        </form>
+
+    </div>
+<% } else { %>
+    <div class="card error">Erreur dans l'importation des données</div>
+<% } %>
+
+<%- include('footer'); %>

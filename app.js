@@ -20,6 +20,9 @@ const routes = require('./routes/routes.js');
 const patientRoutes = require('./routes/patientRoutes.js');
 const mutuelleRoutes = require('./routes/mutuelleRoutes.js');
 const medicamentRoutes = require('./routes/medicamentRoutes.js');
+const medecinRoutes = require('./routes/medecinRoutes.js');
+const pathologieRoutes = require('./routes/pathologieRoutes.js');
+const prescriptionRoutes = require('./routes/prescriptionRoutes.js');
 
 /**********************************************************************************************************************************************/
 
@@ -35,11 +38,19 @@ app.use(express.static('public'));
 // Utilisation de EJS
 app.set('view engine', 'ejs');
 
+// Activer l'échappement automatique
+app.locals.escape = function(html) {
+    return html;
+  };
+
 // Configuration du traitement des formulaires de requete HTTP
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // Gestion des routes
+app.use('/prescription/',prescriptionRoutes);
+app.use('/pathologie/',pathologieRoutes);
+app.use('/medecin/',medecinRoutes);
 app.use('/medicament/',medicamentRoutes);
 app.use('/patient/',patientRoutes);
 app.use('/mutuelle/',mutuelleRoutes);
