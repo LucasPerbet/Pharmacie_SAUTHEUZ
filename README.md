@@ -11,7 +11,7 @@ Projet de BTS 2ème année visant à créer un site intranet destiné aux pharma
 
 ## Configuration
 
-Aucune configuration spéciale n'est requise pour le moment.
+Les scripts de bases de données sont disponibles dans le dossier assets/
 
 ## Utilisation
 
